@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo</title>
+</head>
+
+<body>
+<label for="number_1">数字1： </label><input id="number_1"/>
+<br/>
+<label for="number_2">数字2： </label><input id="number_2"/>
+<br/>
+<span id="res"></span>
+<br/>
+<button onclick="plus()">加</button>
+<button onclick="minus()">减</button>
+</body>
+
+</html>
+<script>
+
+    function plus() {
+        let number1 = document.getElementById("number_1").value
+        let number2 = document.getElementById("number_2").value
+        let resSpan = document.getElementById("res")
+        cordova.plugins.MyPlugin.plus(
+            [number1, number2],
+            (res) => {
+                alert("成功，Android端返回：" + res)
+                resSpan.innerText = res
+            },
+            (e) => {
+                alert("失败，Android端返回：" + e)
+                throw e;
+            }
+        )
+    }
+
+    function minus() {
+        let number1 = document.getElementById("number_1").value
+        let number2 = document.getElementById("number_2").value
+        let resSpan = document.getElementById("res")
+        cordova.plugins.MyPlugin.minus(
+            [number1, number2],
+            (res) => {
+                alert("成功，Android端返回：" + res)
+                resSpan.innerText = res
+            },
+            (e) => {
+                alert("失败，Android端返回：" + e)
+                throw e;
+            }
+        )
+    }
+
+</script>
+
+<script src="cordova.js"></script>
